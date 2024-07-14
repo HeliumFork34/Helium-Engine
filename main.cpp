@@ -31,16 +31,19 @@ int main(int argc, char *argv[]) {
     window.hide();
 
     int BeepFreq = 1000;
-    int32_t I = 0, Cycle = 1000;
+    int WinPos1x = 0, WinPos1y = 100, WinSize1x = 140, WinSize1y = 260;
+    int WinPos2x = 200, WinPos2y = 200, WinSize2x = 400, WinSize2y = 400;
+    int32_t I = 0, Cycle = WinSize2x;
     bool Button1 = 0, Button2 = 0, Button3 = 0, Button3_Active = 0;
     unsigned int Button1Size = 100, Button2Size = 100, Button3Size = 100;
     while(!window.shouldClose()) {
         PNT::processEvents();
 
         window.startFrame();
+        //WINDOW 1
         ImGui::Begin("Controls");
-        ImGui::SetWindowSize(ImVec2(140, 260));
-        if (!Running) {ImGui::SetWindowPos(ImVec2(00,100));}
+        ImGui::SetWindowSize(ImVec2(WinSize1x, WinSize1y));
+        if (!Running) {ImGui::SetWindowPos(ImVec2(WinPos1x,WinPos1y));}
         unsigned int ButtonNo = 0;
         if (Button1) { Button1Size = 105;}
         else { Button1Size = 100; }
@@ -74,24 +77,26 @@ int main(int argc, char *argv[]) {
 
         ImGui::End();
 
-        if (Button3_Active) {
-            ImGui::Begin("Yeeeehaaaaa");
-            ImGui::SetWindowSize(ImVec2(140, 260));
-            ImGui::SetWindowPos(ImVec2(800,800));
-            ImGui::End();}
-
+        //WINDOW 2
         ImGui::Begin("Cool Stuff");
-        ImGui::SetWindowSize(ImVec2(600, 600));
-        if (!Running) { ImGui::SetWindowPos(ImVec2(200,200)); }
+        ImGui::SetWindowSize(ImVec2(WinSize2x, WinSize2y));
+        if (!Running) { ImGui::SetWindowPos(ImVec2(WinPos2x,WinPos2y)); }
 
         if ( !Button1 & !Button2 ) { icon.ImGuiDraw(ImVec2(BeepFreq/10,BeepFreq/10)); }
         else { 
-            if ( I < (Cycle * 0.9) ) { icon.ImGuiDraw(ImVec2(I/2,I/2)); }
-            else { pic1.ImGuiDraw(ImVec2(600,600)); }
+            if ( I < (Cycle * 0.92) ) { icon.ImGuiDraw(ImVec2(I,I)); }
+            else { pic1.ImGuiDraw(ImVec2(WinSize2x,WinSize2y)); }
             }
         if ( Button2 ) { pic1.ImGuiDraw(ImVec2(400,400)); Beep(BeepFreq,50); }
 
         ImGui::End();
+
+        //WINDOW 3
+        if (Button3_Active) {
+            ImGui::Begin("Yeeeehaaaaa");
+            ImGui::SetWindowSize(ImVec2(WinSize2x / 2, WinSize2y / 2));
+            ImGui::SetWindowPos(ImVec2(WinPos2x + WinSize2x,WinPos2y + WinSize2y));
+            ImGui::End();}
 
         window.endFrame();
         Running = 1;
