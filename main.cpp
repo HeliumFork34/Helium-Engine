@@ -14,10 +14,10 @@ int main(int argc, char *argv[]) {
     window.setClearColor(0.25f, 0.25f, 0.25f, 0.25f);
 
     bool Running = 0;
-
     // Set icon.
     PNT::image icon("res\\textures\\logo\\JPT_Window_Icon.png");
     window.setIcon(icon);
+/*
     icon.loadOnGPU();
     PNT::image pic1("res\\textures\\logo\\Ghoul.png");
     pic1.loadOnGPU();
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
     int32_t I = 0, Cycle = WinSize2x;
     bool Button1 = 0, Button2 = 0, Button3 = 0, Button3_Active = 0;
     unsigned int Button1Size = 100, Button2Size = 100, Button3Size = 100;
+
     while(!window.shouldClose()) {
         PNT::processEvents();
 
@@ -61,7 +62,8 @@ int main(int argc, char *argv[]) {
         else { Button3Size = 100; }
         if (ImGui::Button("Display Me", ImVec2(Button3Size, 30))) {
             if ( !Button3_Active) { Button3_Active = 1;}
-            else { Button3_Active = 0; } }
+            else { Button3_Active = 0; } 
+            }
         if (ImGui::IsItemHovered()) { ButtonNo = 3; Button3 = 1; }
         else { Button3 = 0; }
 
@@ -73,6 +75,7 @@ int main(int argc, char *argv[]) {
         ImGui::Text("Button1=%u", Button1);
         ImGui::Text("Button2=%u", Button2);
         ImGui::Text("Button3=%u", Button3);
+        ImGui::Text("Button3_Active=%u", Button3_Active);
         ImGui::Text("I=%i", I);
 
         ImGui::End();
@@ -94,17 +97,24 @@ int main(int argc, char *argv[]) {
         //WINDOW 3
         if (Button3_Active) {
             ImGui::Begin("Yeeeehaaaaa");
+            if (Button3) { ImGui::SetWindowPos(ImVec2(WinPos2x + WinSize2x,WinPos2y + WinSize2y)); }
             ImGui::SetWindowSize(ImVec2(WinSize2x / 2, WinSize2y / 2));
-            ImGui::SetWindowPos(ImVec2(WinPos2x + WinSize2x,WinPos2y + WinSize2y));
-            ImGui::End();}
+            ImGui::End(); }
 
         window.endFrame();
         Running = 1;
         if ( Button1 ) { I = I + 1; }
         else { I = 0; }
         if (I > Cycle) { I = 1; }
-    }
+
+        }
 
     PNT::deinit();
     return 0;
+*/
+while (true) 
+{
+    /* code */
+}
+
 }
